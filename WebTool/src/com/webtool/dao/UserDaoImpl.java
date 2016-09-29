@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao {
 		String password=u.getPassword();
 		try {
 			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select * from userTb where Username='"+name+"'");
+			ResultSet rs=st.executeQuery("select * from UserTb where Username='"+name+"'");
 			
 			if(rs.next()){
 				return false;
