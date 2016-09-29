@@ -10,9 +10,13 @@ public class DBUtil {
 		// TODO Auto-generated constructor stub
 	}
 	
-	String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url="jdbc:sqlserver://localhost:1433; DatabaseName=testbase";
-	String username="sa";
+	//String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	// String url="jdbc:sqlserver://localhost:1433; DatabaseName=testbase";
+	//String username="sa";
+	//String password="123456";
+	String driver="com.mysql.jdbc.Driver";
+	String url="jdbc:mysql://localhost:3306/test";
+	String username="root";
 	String password="123456";
 	
 	public Connection getConnection(){
@@ -36,6 +40,9 @@ public class DBUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void main(String [] args){
+		System.out.println("000");
 	}
 	
 

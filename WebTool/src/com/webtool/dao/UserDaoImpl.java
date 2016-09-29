@@ -18,8 +18,8 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		DBUtil util= new DBUtil();
 		Connection conn= util.getConnection();
-		System.out.println(conn);
-		String sql= "select password from UserTb where name='";
+		System.out.println("conn"+conn);
+		String sql= "select password from UserTb where Username='";
 		String name=u.getName();
 		String password=u.getPassword();
 		try {
@@ -49,12 +49,12 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		DBUtil util=new DBUtil();
 		Connection conn= util.getConnection();
-		String sql="insert into UserTb(name, password) values(?,?)";
+		String sql="insert into UserTb(Username, password) values(?,?)";
 		String name=u.getName();
 		String password=u.getPassword();
 		try {
 			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select * from userTb where name='"+name+"'");
+			ResultSet rs=st.executeQuery("select * from userTb where Username='"+name+"'");
 			
 			if(rs.next()){
 				return false;
