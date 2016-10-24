@@ -4,9 +4,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Log in error</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-Please Check Your Input!
+<div class="jumbotron">
+  <h1 class="text-center">Welcome to Info6210 chat room!</h1>
+  <p style="margin-left:18%">Sorry, Log in error--</p>
+</div>
+<div class="row">
+		 <div class="col-sm-4"></div>
+  		  <div class="col-sm-4">
+  		  		<h4>Please check your input, user name and password could not be void</h4>
+  		  		
+  		  		<a href="/WebTool/index.html"><button class="btn btn-primary">Log In</button></a>
+  		  </div>
+  		 
+  		  <div class="col-sm-4"></div>
+ </div>
+
+
 </body>
 </html>

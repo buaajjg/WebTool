@@ -3,6 +3,7 @@ package com.servlet;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,21 +22,36 @@ public class Log extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action= request.getParameter("action");
 		System.out.println(action);
+		
 		if(action.equals("login")){
-		String name= request.getParameter("name");
-		String password= request.getParameter("password");
-		if(name==null||password==null||name.equals("")||password.equals("")){
-			request.getRequestDispatcher("/error.jsp").forward(request, response);
-			return;
-		}
-		System.out.println(name + password);
+			String username= request.getParameter("username");
+			String password= request.getParameter("password");
+			String record=request.getParameter("record");
+						
+			if(username==null||password==null||username==""||password==""){
+				request.getRequestDispatcher("/error.jsp").forward(request, response);
+				return;
+			}
 		
-		
+				
 			UserDaoImpl userDaoImpl= new UserDaoImpl();
-			User u= new User(name, password);
+			User u= new User(username, password);
 			boolean flag=userDaoImpl.logIn(u);
 			if(flag){
-				request.getRequestDispatcher("/success.jsp").forward(request, response);
+
+				 if(record=="yes")  
+				  {  
+				      Cookie nameCookie = new Cookie("username", username);  
+				      Cookie passCookie = new Cookie("password", password);  
+				     
+				      nameCookie.setMaxAge(30*60*24);
+				      passCookie.setMaxAge(30*60*24);  
+				     
+				      response.addCookie(nameCookie);  
+				      response.addCookie(passCookie);  
+			   } 
+				//request.getRequestDispatcher("/test.html?name="+name).include(request, response);
+				response.sendRedirect("/WebTool/success.jsp?name="+username); 
 			}
 			else{
 				request.getRequestDispatcher("/failure.jsp").forward(request, response);

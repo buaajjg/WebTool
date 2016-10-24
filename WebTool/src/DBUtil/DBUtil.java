@@ -14,8 +14,9 @@ public class DBUtil {
 	// String url="jdbc:sqlserver://localhost:1433; DatabaseName=testbase";
 	//String username="sa";
 	//String password="123456";
+	//url=jdbc:mysql://127.0.0.1:3306/shop?characterEncoding=utf8&useSSL=true
 	String driver="com.mysql.jdbc.Driver";
-	String url="jdbc:mysql://localhost:3306/test";
+	String url="jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useSSL=true";
 	String username="root";
 	String password="123456";
 	

@@ -2,6 +2,7 @@ package com.webtool.dao;
 
 import java.sql.*;
 
+
 import com.webtool.bean.User;
 
 import DBUtil.DBUtil;
@@ -18,18 +19,17 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		DBUtil util= new DBUtil();
 		Connection conn= util.getConnection();
-		System.out.println("conn"+conn);
 		String sql= "select password from UserTb where Username='";
 		String name=u.getName();
 		String password=u.getPassword();
 		try {
 			Statement stmt=conn.createStatement();
-			System.out.println(sql+name+"'");
+			
 			ResultSet rs=stmt.executeQuery(sql+name+"'");
 			while(rs.next()){
 				
-				System.out.println("1--"+rs.getString(1));
 				if(rs.getString(1).equals(password)){
+					
 					return true;
 				}
 			}
@@ -70,6 +70,30 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	@Override
+	public int getUserId(String name){
+		DBUtil util=new DBUtil();
+		Connection conn= util.getConnection();
+		String sql="select UserId from UserTb where UserName='"+name+"'";
+		try {
+			Statement stmt=conn.createStatement();
+			
+			ResultSet rs=stmt.executeQuery(sql);
+			while(rs.next()){
+				
+				return rs.getInt(1);
+			}
+			conn.close();
+			return -1;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return -1;
 	}
 
 }
