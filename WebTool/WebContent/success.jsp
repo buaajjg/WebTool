@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=gbk" import="java.util.*"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=gbk" import="java.util.*, com.webtool.dao.MsgDaoImpl,
+com.webtool.dao.UserDaoImpl, com.webtool.bean.Message, com.webtool.bean.MsgItem, java.io.PrintWriter"     pageEncoding="ISO-8859-1"%>
     
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -59,6 +59,8 @@
 	 	</form>
 	 
 	 	 <div id="myscroll" style="border: 2px solid gray; border-radius:6px; padding:18px; margin-top:20px; width:100%; height:470px; overflow-x:auto; overflow-y:scroll;">
+		        
+		        <!--  this is not valid on linux server, I don't know why
 		        <c:if test="${ itemList!=null }" > 
 					<c:forEach var="i" items="${ itemList }">
 						<div class="row">
@@ -67,9 +69,39 @@
 							  <div class="col-sm-9" > <c:out value="${i.message }" /> </div>
 							
 						</div>		
-					</c:forEach>
+				</c:forEach>
+				
+				
 										
 				</c:if> 
+				
+				-->
+					<%  HttpSession hs= request.getSession();
+						Object list= hs.getAttribute("itemList");
+						List<MsgItem> item= (List)list;
+						
+						
+						if(item!=null||item.size()>0){
+							for(int i=0;i<item.size();i++){
+								out.println("<div class='row'>");
+								out.print("<div class='col-sm-1' style='background-color: #fffacd; margin:3px 0; border-radius:6px'>");
+								out.println(item.get(i).getUserName()+"</div>");
+								
+								out.print("<div class='col-sm-2' style='font-size:10px; background-color: #add8e6; margin:3px 0; border-radius:6px'>");
+								out.println(item.get(i).getTime()+"</div>");
+								
+								out.print("<div class='col-sm-9' >");
+								out.println(item.get(i).getMessage()+"</div>");
+								
+								
+								out.println("</div>");
+								System.out.println("item"+item.get(i).getUserName()+ item.get(i).getTime()+ item.get(i).getMessage());
+							}
+						}
+					
+					
+					%>
+				
 	      </div>
 	   </div>
     <div class="col-sm-2" ></div>
