@@ -95,7 +95,7 @@ com.webtool.dao.UserDaoImpl, com.webtool.bean.Message, com.webtool.bean.MsgItem,
 								
 								
 								out.println("</div>");
-								System.out.println("item"+item.get(i).getUserName()+ item.get(i).getTime()+ item.get(i).getMessage());
+								
 							}
 						}
 					
