@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.webtool.bean.Message;
 import com.webtool.bean.MsgItem;
 import com.webtool.dao.MsgDaoImpl;
@@ -24,12 +25,24 @@ public class Chat extends HttpServlet {
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userName= request.getParameter("name");
-		String action= request.getParameter("action");
-		String message= request.getParameter("input");
+		HttpSession hs= request.getSession(false);
 		
-		if(action.equals("post")){
+		String userName= request.getParameter("name");
+		//String action= request.getParameter("action");
+		String message= request.getParameter("input");
+	
+			if(message.equals("invalidate")){
+				hs=null;
+			}
+			if(hs==null){
+				
+				//JOptionPane.showMessageDialog(null, "session expired, Please relogin!");
+				response.getWriter().print("<script language='javascript'>alert('Session expired, relogin');window.location.href='index.html';</script>");
+				return;
+			}
+		
 			
+					
 			MsgDaoImpl msgDaoImpl= new MsgDaoImpl();
 			
 			if(message!=""&&message!=null){
@@ -45,15 +58,16 @@ public class Chat extends HttpServlet {
 			
 			List<MsgItem> list= msgDaoImpl.getRecord();
 			
-			HttpSession hs= request.getSession();
+			
+			System.out.println(hs.getId());
 			hs.setAttribute("itemList", list);
 			
-			request.getRequestDispatcher("/success.jsp?action=post&name="+userName).forward(request, response);
+			request.getRequestDispatcher("/success.jsp?name="+userName).forward(request, response);
 		}
 		
 				
 		
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

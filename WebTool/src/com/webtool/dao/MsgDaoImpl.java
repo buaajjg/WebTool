@@ -22,7 +22,7 @@ public class MsgDaoImpl implements MsgDao {
 		Connection conn= db.getConnection();
 		String message= msg.getMsg();
 		int userId=msg.getUserId();
-		String sql="insert into MsgTb (Time, message, UserId) values(now(), ?, ? )";
+		String sql="insert into MsgTb (Time, Message, UserId) values(now(), ?, ? )";
 		
 		
 		try {
@@ -47,7 +47,7 @@ public class MsgDaoImpl implements MsgDao {
 		
 		DBUtil util= new DBUtil();
 		Connection conn= util.getConnection();
-		String sql= "select userName, time, message from usertb join msgtb on usertb.userid=msgtb.userid order by time";
+		String sql= "select UserName, Time, Message from UserTb join MsgTb on UserTb.UserId=MsgTb.UserId order by Time";
 		
 		try {
 			Statement stmt=conn.createStatement();

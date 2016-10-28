@@ -1,14 +1,19 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.webtool.bean.MsgItem;
 import com.webtool.bean.User;
+import com.webtool.dao.MsgDaoImpl;
 import com.webtool.dao.UserDaoImpl;
 
 /**
@@ -21,7 +26,7 @@ public class Log extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action= request.getParameter("action");
-		System.out.println(action);
+		
 		
 		if(action.equals("login")){
 			String username= request.getParameter("username");
@@ -50,8 +55,19 @@ public class Log extends HttpServlet {
 				      response.addCookie(nameCookie);  
 				      response.addCookie(passCookie);  
 			   } 
+				 
+				 HttpSession hs=request.getSession();
+				 hs.setMaxInactiveInterval(60*5);
+				 hs.setAttribute("username", username);
+				 hs.setAttribute("password", password);
+				 System.out.println("session create when log in:"+ hs);
 				//request.getRequestDispatcher("/test.html?name="+name).include(request, response);
-				response.sendRedirect("/WebTool/success.jsp?name="+username); 
+				 
+					MsgDaoImpl msgDaoImpl= new MsgDaoImpl();
+					List<MsgItem> list= msgDaoImpl.getRecord();
+					hs.setAttribute("itemList", list);
+				 
+				response.sendRedirect("/WebTool/success.jsp"); 
 			}
 			else{
 				request.getRequestDispatcher("/failure.jsp").forward(request, response);
