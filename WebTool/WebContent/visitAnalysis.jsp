@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" import="com.webtool.dao.RecordDaoImpl,com.webtool.bean.RecordItem, java.util.List"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" import="com.webtool.dao.RecordDaoImpl,com.webtool.bean.RecordItem, java.util.List, com.webtool.dao.RequestDaoImpl"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -32,26 +32,66 @@
 </div>
   
   <%  						
-						RecordDaoImpl recordDaoImpl= new RecordDaoImpl();
+				    RequestDaoImpl requestDaoImpl= new RequestDaoImpl();
+					
+					out.println("<div class='row' style='margin:0' > ");
+					out.print("<div class='col-sm-1' style='background-color: #ffcbbb; margin:3px 0'>");
+					out.println("Last Minute Request"+"</div>");
+					out.print("<div class='col-sm-1' style='margin:3px 0;padding-top:5px; font-size:20px'>");
+					out.println( requestDaoImpl.getLastMinuteRequest()+"</div>");
+					
+					
+					out.print("<div class='col-sm-1' style='background-color: #faabbb; margin:3px 0'>");
+					out.println("Last Hour Request"+"</div>");
+					out.print("<div class='col-sm-1' style='padding-top:5px; font-size:20px; margin:3px 0'>");
+					out.println( requestDaoImpl.getLastHourRequest()+"</div>");
+					
+					out.print("<div class='col-sm-1' style='background-color: #aacbbb; margin:3px 0'>");
+					out.println("Last Day Request"+"</div>");
+					out.print("<div class='col-sm-1' style='padding-top:5px; font-size:20px; margin:3px 0'>");
+					out.println( requestDaoImpl.getLastDayRequest()+"</div>");
+					
+					out.print("<div class='col-sm-1' style='background-color: #ffcb22; margin:3px 0'>");
+					out.println("Last Week Request"+"</div>");
+					out.print("<div class='col-sm-1' style='padding-top:5px; font-size:20px; margin:3px 0'>");
+					out.println( requestDaoImpl.getLastWeekRequest()+"</div>");
+					
+					out.print("<div class='col-sm-1' style='background-color: #04cb3b; margin:3px 0'>");
+					out.println("Last Month Request"+"</div>");
+					out.print("<div class='col-sm-1' style='padding-top:5px; font-size:20px; margin:3px 0'>");
+					out.println( requestDaoImpl.getLastMonthRequest()+"</div>");
+					
+					out.print("<div class='col-sm-1' style='background-color: #04cffb; margin:3px 0'>");
+					out.println("Last Year Request"+"</div>");
+					out.print("<div class='col-sm-1' style='padding-top:5px; font-size:20px; margin:3px 0'>");
+					out.println( requestDaoImpl.getLastYearRequest()+"</div>");
+					
+										
+					out.println("</div>");
+				  
+  
+  
+  
+  						RecordDaoImpl recordDaoImpl= new RecordDaoImpl();
 						
 						out.println("<div class='row' style='margin:0 5%' > ");
 						out.print("<div class='col-sm-2' style='background-color: #ffcbbb; margin:3px 0'>");
-						out.println("Last One Hour Visit"+"</div>");
+						out.println("Last One Hour Visit:"+"</div>");
 						out.print("<div class='col-sm-1' style='background-color: #ffcbbb; margin:3px 0'>");
 						out.println( recordDaoImpl.lastOneHourVisit()+"</div>");
 						
 						out.print("<div class='col-sm-2' style='background-color: #aacbbb; margin:3px 0'>");
-						out.println("Last One Day Visit"+"</div>");
+						out.println("Last One Day Visit:"+"</div>");
 						out.print("<div class='col-sm-1' style='background-color: #aacbbb; margin:3px 0'>");
 						out.println( recordDaoImpl.lastOneDayVisit()+"</div>");
 						
 						out.print("<div class='col-sm-2' style='background-color: #ffcb22; margin:3px 0'>");
-						out.println("Last OneWeek Visit"+"</div>");
+						out.println("Last OneWeek Visit:"+"</div>");
 						out.print("<div class='col-sm-1' style='background-color: #ffcb22; margin:3px 0'>");
 						out.println( recordDaoImpl.lastOneWeekVisit()+"</div>");
 						
 						out.print("<div class='col-sm-2' style='background-color: #04cb3b; margin:3px 0'>");
-						out.println("Last one month visit"+"</div>");
+						out.println("Last one month visit:"+"</div>");
 						out.print("<div class='col-sm-1' style='background-color: #04cb3b; margin:3px 0'>");
 						out.println( recordDaoImpl.lastOneMonthVisit()+"</div>");
 						
@@ -59,13 +99,13 @@
 						out.println("</div>");
 						
 						
-					%> 
+	%> 
 
 <div class="row">
     <div class="col-sm-2" ></div>
     <div class="col-sm-8" >
     			<% 
-    			out.println("<div class='row' style='margin-top:10px'> ");
+    			out.println("<div class='row' style='margin-top:10px; width:104%;'> ");
 		     		
 					out.print("<div class='col-sm-1' style='background-color: #ffcbbb; margin:0'>");
 					out.println("ID"+"</div>");
@@ -85,7 +125,7 @@
 																
 					out.println("</div>");
 	  		%>
-	 	 <div id="myscroll" style="border: 2px solid gray; border-radius:6px; padding:5px;  width:100%; height:470px; overflow-x:auto; overflow-y:scroll;">
+	 	 <div id="myscroll" style="border: 2px solid gray; border-radius:6px; padding:5px;  width:104%; height:470px; overflow-x:auto; overflow-y:scroll;">
 		        
 		    <%	     	    
 		       	List<RecordItem> list= recordDaoImpl.getRecord();
